@@ -1,0 +1,79 @@
+﻿@using System.IO;
+@using webapi.Models;
+
+@model IEnumerable<User>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+
+    <h3>Import table of users</h3>
+    @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <input type="file" name="postedFile" />
+        <input type="submit" value="Import" />
+    }
+    <h3>Table of users</h3>
+    @if (Model.Count() > 0)
+    {
+        <hr />
+        <table cellpadding="0" cellspacing="0">
+            <tr>
+                <th>Id  </th>
+                <th>First Name  </th>
+                <th>Last Name  </th>
+                <th>Time Zone  </th>
+                <th>Phone  </th>
+                <th>About  </th>
+            </tr>
+            @foreach (User user in Model)
+            {
+                <tr>
+                    <td>@user.id  </td>
+                    <td>@user.first_name  </td>
+                    <td>@user.last_name  </td>
+                    <td>@user.timezone  </td>
+                    <td>@user.phone  </td>
+                    <td>@user.about  </td>
+                </tr>
+            }
+        </table>
+    }
+
+        <form>
+            <h3>Add user</h3>
+            <div class="form-group">
+                <label for="firstNameInput">First Name</label>
+                <input type="text" class="form-control" id="firstNameInput" placeholder="First Name input">
+            </div>
+            <div class="form-group">
+                <label for="LastNameInput">Last Name</label>
+                <input type="text" class="form-control" id="lastNameInput" placeholder="Last Name input">
+            </div>
+            <div class="form-group">
+                <label for="TimeZoneInput">Time Zone</label>
+                <input type="text" class="form-control" id="timeZoneInput" placeholder="Time Zone input">
+            </div>
+            <div class="form-group">
+                <label for="phoneInput">Phone</label>
+                <input type="text" class="form-control" id="PhoneInput" placeholder="Phone input">
+            </div>
+            <div class="form-group">
+                <label for="AboutInput">About</label>
+                <input type="text" class="form-control" id="AboutInput" placeholder="Tell us about yourself...">
+            </div>
+            <div class="col-sm-10">
+                <button type="submit" class="btn btn-primary">Add User</button>
+            </div>
+        </form>
+</body>
+</html>
